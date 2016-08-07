@@ -26,21 +26,22 @@ $(document).ready(function() {
 		//$('ul#guessList').closest('li').remove();
 		//$('h2#feedback').remove();
 
-		$("input#userGuess").val('');
-		$('span#count').text(0);
+		number = $("input#userGuess").val('');
+		userGuess = parseInt(number);
+		//count = 0;
+		$('span#count').text(count);
 		$('h2#feedback').text("Make your Guess!");
-
 		secretNumber = generateNumber(1, 100);
-
-		console.log("start new game");
+		console.log("New GAME STARTED");
 		console.log("the new secretNumber is " + secretNumber);
+		userGuessFeedback(secretNumber, userGuess);
 	})
 
 
 
 
 
-//nothing happens in this bit of code yet
+
 
 	
  	$('input#guessButton').click(function () {
@@ -48,11 +49,12 @@ $(document).ready(function() {
  		number = $('input#userGuess').val(); 
 		userGuess = parseInt(number);
  		if (count > 0) {
- 			$("span#count").html(" ") //html allows you to modify or add more markup to a section
+ 			$()
+ 			$("span#count").text(count) //html allows you to modify or add more markup to a section
  		}
  		$('ul#guessList').append("<li>" + userGuess + "</li>")
- 		console.log("your guess is " + userGuess);
  		console.log("the secretNumber is " + secretNumber);
+ 		console.log("your guess is " + userGuess);
  		userGuessFeedback(secretNumber, userGuess);
  	})
  
@@ -64,7 +66,7 @@ $(document).ready(function() {
 			$(this).find('ul#guessList').append("<li>" + userGuess + "</li>")
 	 		userGuessFeedback(secretNumber, userGuess);
 	 	}
-	 	return false;
+	 	//return false;
 	 }) 
 
 
@@ -76,6 +78,7 @@ $(document).ready(function() {
 		console.log("Inside the feedback function, your guess is still " + userGuess);
 		
 		var feedback = secretNumber - userGuess; 
+		
 		if (feedback >= 50) {
 			$('#feedback').text("Ice-Cold");
 		}
@@ -86,11 +89,12 @@ $(document).ready(function() {
 			$('#feedback').text("Warm");
 		}
 		else if (feedback >= 10 && feedback <= 20) {
-			$('#feedback').text("Hot");
+			$('#feedback').text("Hot")
 		}
 
 		else if (feedback == 0) {
 			$('#feedback').text("You Guessed It!")
+			console.log(userGuess + " is the correct answer!")
 		}
 		else {
 			$('#feedback').text("Very Hot");
