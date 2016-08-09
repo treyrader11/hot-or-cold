@@ -1,3 +1,6 @@
+'use strict'
+
+
 $(document).ready(function() {
 	
 
@@ -8,6 +11,7 @@ $(document).ready(function() {
 	var guessButton = $('#guessButton');
 	var listOfGuesses = $('#guessList');
 	var guessCount = 0;
+	var userWinModal = $('#winningModal');
 	//following var contains an invoked function that is called when the page loads
 	var secretNumber = generateNumber(1,100);
 
@@ -51,8 +55,8 @@ $(document).ready(function() {
 
 	  //feedback will reflect in the feedbackHeader to inform user of how hot/cold the user is from the secretNumber.
 	function inputNumber() {
-		number = userInput.val(); 
-		userGuess = parseInt(number);
+		var number = userInput.val(); //first time declaring variables so include 'var'
+		var userGuess = parseInt(number);
 		console.log("your number is " + userGuess);
 		console.log("the secret number is " + secretNumber);
 		if (userGuess >= 1 && userGuess <= 100) {
@@ -81,10 +85,11 @@ $(document).ready(function() {
 		if (userFeedback === 0) {
 		 	feedbackHeader.text("The Secret Number is " + secretNumber + "!");
 		 	listOfGuesses.append('<li class="secret newGuess">' + userGuess + '</li>');
-		 	$('#winningModal').fadeIn(1000);
+		 	userWinModal.fadeIn(1000);
 		 	newGameButton.click(function() {
-		 		$('#winningModal').fadeOut(1000);
+		 		userWinModal.fadeOut(1000);
 		 	});
+		 	//userWon(); <--located at very bottom of page; needs much work
 		}
 		else if (userFeedback <= 9 && userFeedback >= -9) {
 		 	//between -9 to 9
@@ -124,6 +129,25 @@ $(document).ready(function() {
 		$('.overlay').fadeOut(1000);
 	})
 
+
+		
+		
+
+
+
+
+	//extraneous function below for experimentation. 
+
+	/*function userWon() {
+		 $(document).keypress(function(event) {
+    		var keycode = event.which;                       //var keycode = (event.keyCode ? event.keyCode : event.which)
+    		if (keycode == 13) {
+    			userWinModal.fadeOut(1000);
+    			newGame();
+    		}
+    	});
+	};
+*/
+
 })
  
-
